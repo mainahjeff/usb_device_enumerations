@@ -57,23 +57,17 @@ void usb_device(uint16_t idv)
     if (libusb_claim_interface(handle, intfs.bInterfaceNumber) == 0)
         printf("\n********interface free******** \n\n");
 
-    usb_send_string(handle, endpout, devDesc, "12345");
-
-    usb_read_string(handle, endpout);
-    // usb_file_read(handle,endpout, devDesc, "myhex.hex");
-    // usb_file_read(handle,endpout, devDesc, "../AVR_ISP/icsp.txt");
-    // remote_wake(handle, SetDevFeature);
-    // remote_wake(handle, ClearDevFeature);
-    // clear_halt(handle, endpout);
-    // clear_halt(handle, endpin);
-
+    ///  FUNCTION_CALLS FROM USB1.H FILE////
+    
+    //usb_send_string(handle, endpout, devDesc, "12345");
+    //usb_read_string(handle, endpout);
+    // usb_file_read(handle,endpout, devDesc,[FILENAME});
     // dev_status(handle);
     // intf_status(handle,intfs);
     // ep_in_status(handle, endpin);
     // ep_out_status(handle,endpout);
 
-    // usb_file_write("usbControls.txt", "hey");
-    // int bd = ftsend_cntr(handle, 0xC0, xxxxx, 0, 0, buffer, 10);
+    // usb_file_write([FILENAME],"Hello World);
 
     libusb_close(handle);
     printf("\nEnd: \n");
@@ -82,8 +76,8 @@ void usb_device(uint16_t idv)
 
 int main(int argc, char const *argv[])
 {
-    // usb_device(0x1a86);
-    // usbGetDevice(0x1a86);
+    // usb_device(id_vid);
+    // usbGetDevice(id_vid);
     usbGetaLLDevices();
 
     return 0;
