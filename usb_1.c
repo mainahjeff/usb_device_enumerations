@@ -9,7 +9,7 @@ extern unsigned char buffer[1024];
 extern unsigned char Desc_buffer[1024];
 unsigned char *int_buffer;
 int *actLen;
-uint16_t cnt = 0;
+uint16_t cnt = 0; 
 
 void usb_device(uint16_t idv)
 {
