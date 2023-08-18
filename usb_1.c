@@ -5,6 +5,8 @@
 #include <string.h>
 #include "usb_1.h"
 
+#define DEVICE_ID 0x14CD// FT232RL
+
 extern unsigned char buffer[1024];
 extern unsigned char Desc_buffer[1024];
 unsigned char *int_buffer;
@@ -21,14 +23,14 @@ void usb_device(uint16_t idv)
     struct libusb_transfer *transfer;
     libusb_device_handle *handle;
 
-    handle = usbGetDevice(idv);
+    handle = usbGetDevice(DEVICE_ID);
     if (handle == NULL)
     {
         printf("\n\n");
         printf("      CAUTION!! \n");
-        printf("Device vendor-Id 0x%.4X not found\n", idv);
+        printf("Device vendor-Id 0x%.4X not found\n", DEVICE_ID);
         printf("Make sure you are root `sudo-s`... ");
-        printf("and input the correct device  Vendor-Id \n\n");
+        printf("and/or input a correct device  Vendor-Id \n\n");
         exit(0);
     }
     devDesc = usbDevDesc(handle, 0x80, LIBUSB_REQUEST_GET_DESCRIPTOR, 0, Desc_buffer, 50, 1);
@@ -57,16 +59,15 @@ void usb_device(uint16_t idv)
     if (libusb_claim_interface(handle, intfs.bInterfaceNumber) == 0)
         printf("\n********interface free******** \n\n");
 
-    ///  FUNCTION_CALLS FROM USB1.H FILE////
+    /// UNCOMMENT FUNCTION_CALLS ////
     
-    //usb_send_string(handle, endpout, devDesc, "12345");
+    //usb_send_string(handle, endpout, devDesc, "Hello World");
     //usb_read_string(handle, endpout);
     // usb_file_read(handle,endpout, devDesc,[FILENAME});
     // dev_status(handle);
     // intf_status(handle,intfs);
     // ep_in_status(handle, endpin);
     // ep_out_status(handle,endpout);
-
     // usb_file_write([FILENAME],"Hello World);
 
     libusb_close(handle);
@@ -76,9 +77,9 @@ void usb_device(uint16_t idv)
 
 int main(int argc, char const *argv[])
 {
-    // usb_device(id_vid);
-    // usbGetDevice(id_vid);
-    usbGetaLLDevices();
+    usb_device(DEVICE_ID);
+    // usbGetDevice(DEVICE_ID);
+    // usbGetaLLDevices();
 
     return 0;
 }
